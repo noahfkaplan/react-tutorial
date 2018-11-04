@@ -67,9 +67,11 @@ export default class Game extends React.Component {
         <div className="game">
           <div className="game-board">
             <div>
-                <ScoreBoard player1={this.state.winCounter.player1} player2={this.state.winCounter.player2}/>
+              <ScoreBoard player1={this.state.winCounter.player1} player2={this.state.winCounter.player2}/>
             </div>
-            <Board squares={currentBoard.squares} onClick={(i) => this.handleClick(i)}/>
+            <div className="board">
+              <Board squares={currentBoard.squares} onClick={(i) => this.handleClick(i)}/>
+            </div>
           </div>
           <div className="game-info">
             <div>{status}</div>
