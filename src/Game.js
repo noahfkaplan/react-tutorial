@@ -42,10 +42,24 @@ export default class Game extends React.Component {
         xIsNext: (step % 2) === 0,
       });
     }
+    restart(){
+      this.jumpTo(0);
+      this.setState({
+        stepNumber: 0,
+        history: [{squares: Array(9).fill(null)}]
+      })
+    }
     render() {
       const history = this.state.history;
       const currentBoard = history[this.state.stepNumber];
       const winner = CalculateWinner(currentBoard.squares);
+      let status;
+      if(winner){
+        status = 'The winner is: ' + (winner);
+      }
+      else{
+        status = 'Current Turn: ' + (this.state.turnX ? 'X':'O');
+      }      
       const moves = history.map((step, move) => {
         const desc = move ?
           'Go to move #' + move :
@@ -56,18 +70,13 @@ export default class Game extends React.Component {
           </li>
         );
       });
-      let status;
-      if(winner){
-        status = 'The winner is: ' + (winner);
-      }
-      else{
-        status = 'Current Turn: ' + (this.state.turnX ? 'X':'O');
-      }
+
       return (
         <div className="game">
           <div className="game-board">
             <div>
               <ScoreBoard player1={this.state.winCounter.player1} player2={this.state.winCounter.player2}/>
+              <button onClick = {() => this.restart()}>Restart</button>
             </div>
             <div className="board">
               <Board squares={currentBoard.squares} onClick={(i) => this.handleClick(i)}/>
