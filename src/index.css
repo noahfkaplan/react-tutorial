@@ -74,3 +74,24 @@ body {
     font-weight: bold;
     margin-right: 20px;
   }
+  .control{
+    font: courier;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 18px;
+    border: none;
+    padding: 6px 12px;
+    margin-right: 6px;
+    background-color: red;
+  }
+  .listItem{
+    font: courier;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 2px 6px;
+    border: none;
+    margin-top: 6px;
+  }
+  .controlGroup{
+    margin-top: 12px;
+  }

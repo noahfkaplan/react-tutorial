@@ -2,6 +2,7 @@ import React from 'react'
 import Board from './Board'
 import ScoreBoard from './ScoreBoard'
 import {CalculateWinner} from './HelperFunctions'
+import Button from './Button'
 
 export default class Game extends React.Component {
     constructor(props){
@@ -49,6 +50,13 @@ export default class Game extends React.Component {
         history: [{squares: Array(9).fill(null)}]
       })
     }
+    clearResults(){
+      this.restart();
+      this.setState({
+        turnX: true,
+        winCounter: {player1: 0, player2: 0}
+      })
+    }
     render() {
       const history = this.state.history;
       const currentBoard = history[this.state.stepNumber];
@@ -66,7 +74,7 @@ export default class Game extends React.Component {
           'Go to game start';
         return (
           <li key={move}>
-            <button onClick={() => this.jumpTo(move)}>{desc}</button>
+            <Button type = "listItem" text = {desc} onClick={() => this.jumpTo(move)}/>
           </li>
         );
       });
@@ -76,10 +84,13 @@ export default class Game extends React.Component {
           <div className="game-board">
             <div>
               <ScoreBoard player1={this.state.winCounter.player1} player2={this.state.winCounter.player2}/>
-              <button onClick = {() => this.restart()}>Restart</button>
             </div>
             <div className="board">
               <Board squares={currentBoard.squares} onClick={(i) => this.handleClick(i)}/>
+              <div className="controlGroup">
+                <Button type = "control" text = "Restart" onClick = {() => this.restart()}/>
+                <Button type = "control" text = "Clear Results" onClick = {() => {this.clearResults()}}/>
+              </div>
             </div>
           </div>
           <div className="game-info">
